@@ -7,6 +7,8 @@ import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -39,7 +41,7 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth, additionalInformation={displayName:''}) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation={}) => {
       if (!userAuth) return;
 
       const userDocRef = doc(db, 'users', userAuth.uid);
@@ -48,14 +50,14 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
 
       const userSnapshot = await getDoc(userDocRef);
       console.log(userSnapshot);
-      console.log(userSnapshot.exists());
-
+      console.log(userAuth, "usersnap" )
       if(!userSnapshot.exists()){
           const { displayName, email } = userAuth;
+          console.log(displayName)
           const createdAt = new Date();
 
           try{
-              
+              console.log("setdoc")
               await setDoc(userDocRef, {
               displayName,
               email,
@@ -74,12 +76,13 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
 
       //return userDocRef
 
-  }
+  };
+
 export const createAuthUserWithEmailAndPassword= async (email,password) => {
   if(!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password)
-  }
+  };
 
 
 export const signInAuthWithEmailAndPassword = async (email, password) => {
@@ -87,4 +90,8 @@ export const signInAuthWithEmailAndPassword = async (email, password) => {
    
   return await signInWithEmailAndPassword(auth, email, password);
 
-}
+};
+
+export const signOutUser = async() => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
