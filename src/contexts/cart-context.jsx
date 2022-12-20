@@ -1,36 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
-// const addCartItem = (cartItems, productToAdd) => {
-//    // const found = cartItems.includes(productToAdd)
 
-//  if (cartItems === undefined) {
-  
-//   return [...cartItems, {...productToAdd, quantity: 1}]
-//  }
- 
-//    for (let i = 0; i < cartItems.length; i++) {
-//        if (cartItems[i].id === productToAdd.id ) {
-//          const cartItem = cartItems[i];
-         
-//       return cartItems
-//        }}
-
-
-//    return {...carItems, quantity: cartItems.quantity +1}
-//    //find if cartItems contains productToAdd
-//    //If found, increment quantity
-
-//    //return new array with modified cartItems/ new cart item
-// } 
-// const addCartItem = (cartItems, productToAdd) => {
-//    // const found = cartItems.includes(productToAdd)
-//    const found  = cartItems.find((cartItem => cartItem.id === productToAdd.id))
-
-//    if(found) {
-
-//       cartItems.map((cartItem) => cartItem.id === productToAdd.id ? )
-//    }
-// } 
 
 
 const addCartItem = (cartItems, productToAdd) => {
@@ -41,7 +11,7 @@ const addCartItem = (cartItems, productToAdd) => {
    
    if(existingCartItem) {
       return cartItems.map((cartItem) => cartItem.id === productToAdd.id ?
-      {...cartItem, quantity: cartItem.quantity +1}
+      {...cartItem, quantity: cartItem.quantity + 1}
       : cartItem);
    };
 
@@ -51,7 +21,32 @@ const addCartItem = (cartItems, productToAdd) => {
 
    //return new array with modified cartItems/ new cart item
 } 
+const removeCartItem = (cartItems, cartItemToRemove) => {
 
+
+   const existingCartItem = cartItems.find((cartItem) => cartItem.id === cartItemToRemove.id);
+
+   if(existingCartItem.quantity === 1) {
+    
+
+      return ( cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id ))
+   }
+    
+   return cartItems.map((cartItem) => cartItem.id === cartItemToRemove.id ?
+
+  
+   {...cartItem, quantity: cartItem.quantity - 1}
+
+   : cartItem);
+
+   
+   //find if cartItems contains productToAdd
+   //If found, increment quantity
+
+   //return new array with modified cartItems/ new cart item
+} 
+const clearCartItem = (cartItems, cartItemToClear) => cartItems.filter(cartItem => cartItem.id !== cartItemToClear.id )
+   
 
 
 //actual value you want to access
@@ -60,17 +55,27 @@ export const CartContext = createContext({
    setIsCartOpen: () => {},
    cartItems: [],
    addItemToCart: () => {},
-   CartCart: 0,
+   removeItemFromCart: () => {},
+   clearItemFromCart: () => {},
+   cartCount: 0,
+   cartTotal: 0,
  });
 
  export const CartProvider = ({ children }) => {
   const [IsCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0)
+  const [cartCount, setCartCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
+
 
   useEffect(() => {
    const newCartCount = cartItems.reduce((total, cartItem ) => total + cartItem.quantity, 0)
    setCartCount(newCartCount)
+  }, [cartItems])
+
+  useEffect(() => {
+   const newCartTotal = cartItems.reduce((total, cartItem ) => total + cartItem.quantity * cartItem.price, 0)
+   setCartTotal(newCartTotal)
   }, [cartItems])
 
   const addItemToCart = (productToAdd) => {
@@ -79,7 +84,21 @@ export const CartContext = createContext({
 
 
   }
-  const value ={IsCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount};
+
+  const removeItemFromCart = (cartItemToRemove) => {
+
+   setCartItems(removeCartItem(cartItems, cartItemToRemove));
+
+
+  }
+
+  const clearItemFromCart = (cartItemToClear) => {
+
+   setCartItems(clearCartItem(cartItems, cartItemToClear));
+
+
+  }
+  const value ={IsCartOpen, setIsCartOpen, addItemToCart, removeItemFromCart, clearItemFromCart, cartItems, cartCount, cartTotal};
 
 
      return (
