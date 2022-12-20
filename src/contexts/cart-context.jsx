@@ -92,6 +92,7 @@ export const CartContext = createContext({
 
   }
 
+  
   const clearItemFromCart = (cartItemToClear) => {
 
    setCartItems(clearCartItem(cartItems, cartItemToClear));
