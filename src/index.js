@@ -7,7 +7,7 @@ import { UserProvider } from './contexts/user.context'
 
 import { CategoriesProvider } from './contexts/categories.context';
 
-import { CartProvider } from './contexts/cart-context';
+import { CartProvider } from './contexts/cart.context';
 import './index.scss';
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
