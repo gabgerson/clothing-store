@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-// import { signInWithPopup } from 'firebase/auth';
+
 import { 
     getAuth, 
     signInWithRedirect, 

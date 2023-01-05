@@ -27,8 +27,7 @@ export const CategoriesContext = createContext({
 
 
   const value ={ categoriesMap };
-
-    console.log(value, "Map")
+  
      return (
      <CategoriesContext.Provider value={value} >
       {children}

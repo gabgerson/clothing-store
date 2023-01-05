@@ -4,14 +4,12 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import SignUpForm from "../../components/sign-up-form/sign-up-form.component";
 import SignInForm from "../../components/sign-in-form/sign-in-form.component";
-import Button from "../../components/button/button-component";
+import Button, { BUTTON_TYPE_CLASSES } from "../../components/button/button-component";
 const SignIn = () => {
 
     const logGoogleUser = async () => {
         const { user } = await signInWithGooglePopup();
         const userDocRef =  await createUserDocumentFromAuth(user);
-
-        // console.log(response);
     }
 
     return (
@@ -20,7 +18,7 @@ const SignIn = () => {
           <div >
             <div>
             <SignInForm />
-            <Button buttonType= "google" onClick={logGoogleUser}>
+            <Button buttonType= {BUTTON_TYPE_CLASSES.google} onClick={logGoogleUser}>
               Sign in with Google
             </Button>
             </div>

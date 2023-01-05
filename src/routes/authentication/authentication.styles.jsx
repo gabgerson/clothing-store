@@ -6,6 +6,6 @@ export const AuthenticationContainer = styled.div`
   width: 900px;
   justify-content: space-between;
   margin: 30px auto;
-  `
+  `;
 
 

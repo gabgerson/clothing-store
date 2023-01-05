@@ -6,5 +6,5 @@ export const Homepage = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px 80px;
-`
+`;
 

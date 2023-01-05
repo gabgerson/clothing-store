@@ -19,6 +19,7 @@ export const Body = styled.div`
   background-color: white;
   opacity: 0.7;
   position: absolute;
+
   h2 {
     font-weight: bold;
     margin: 0 6px 0;
@@ -26,6 +27,7 @@ export const Body = styled.div`
     color: #4a4a4a;
     text-transform: uppercase;
   }
+  
   p {
     font-weight: lighter;
     font-size: 16px;

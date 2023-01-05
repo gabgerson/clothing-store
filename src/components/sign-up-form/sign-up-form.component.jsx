@@ -22,7 +22,7 @@ const SignUpForm = () => {
   
   
 
-  console.log('hit');
+ 
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -104,7 +104,7 @@ const SignUpForm = () => {
              value={confirmPassword} 
              required
              />
-             <Button   type="submit">Sign Up</Button>
+             <Button  type="submit">Sign Up</Button>
             </form>
         </SignUpContainer>
     );
