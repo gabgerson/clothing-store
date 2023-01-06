@@ -7,9 +7,9 @@ import { CartIconContainer, ItemCount } from './cart-icon.styles'
 
 const CartIcon = () => {
 
-    const { IsCartOpen, setIsCartOpen, cartCount} = useContext(CartContext);
+    const { isCartOpen, setIsCartOpen, cartCount} = useContext(CartContext);
 
-    const toggleCartOpen = () => setIsCartOpen(!IsCartOpen);
+    const toggleCartOpen = () => setIsCartOpen(!isCartOpen);
     
  
     

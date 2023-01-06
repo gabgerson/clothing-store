@@ -1,5 +1,8 @@
 import { createContext, useEffect, useReducer } from "react";
 import { createUserDocumentFromAuth, onAuthStateChangedListener} from "../utils/firebase/firebase.utils";
+
+import { createAction } from "../utils/reducer.utils";
+
 //actual value you want to access
 export const UserContext = createContext({ 
     currentUser: null,
@@ -36,7 +39,7 @@ const INITIAL_STATE = {
     const [ { currentUser }, dispatch ] = useReducer(userReducer, INITIAL_STATE); 
     console.log(currentUser)
     const setCurrentUser = (user) => {
-      dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user })
+      dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user ))
     }
 
 
@@ -47,10 +50,11 @@ const INITIAL_STATE = {
     useEffect(() => {
       const unsubscribe = onAuthStateChangedListener((user) => {
         
+        console.log(user , "unsubscribe")
         if(user){
-            createUserDocumentFromAuth(user);
+            createUserDocumentFromAuth(user); //check if user exists
         } 
-        setCurrentUser(user);
+        setCurrentUser(user); //null or set user
       })
       return unsubscribe
     }, [])
