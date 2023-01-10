@@ -21,11 +21,11 @@ const App = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       
-      console.log(user , "unsubscribe")
+   
       if(user){
           createUserDocumentFromAuth(user); //check if user exists
       } 
-      console.log(user)
+ 
       dispatch(setCurrentUser(user)); //null or set user
     })
     return unsubscribe

@@ -18,7 +18,7 @@ const Shop = () => {
     //create new async fuction to surround async funciton when using useEffect
     const getCategoriesMap = async () =>{
       const categoriesArray = await getCategoriesAndDocuments();
-      console.log(categoriesArray) 
+
        dispatch(setCategories(categoriesArray));
    
     }
