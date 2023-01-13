@@ -10,6 +10,7 @@ import Button, { BUTTON_TYPE_CLASSES } from '../button/button-component'
 
 import { ProductCardContainer, Footer, Name, Price } from './product-card.styles'
 
+
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
   
@@ -19,7 +20,6 @@ const ProductCard = ({ product }) => {
 
   const addProductToCart = () => {
 
-   console.log(product, "PRODUCT")
     return dispatch(addItemToCart( cartItems, product))};
 
  return ( 
